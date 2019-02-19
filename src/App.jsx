@@ -9,8 +9,8 @@ const Header = (props) => {
 };
 
 class App extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       title: 'My app',
@@ -18,8 +18,10 @@ class App extends React.Component {
     };
 
     document.addEventListener('contextmenu', () => {
-      this.setState({
-        isHandlingChanges: !this.state.isHandlingChanges,
+      this.setState((state) => {
+        return {
+          isHandlingChanges: !state.isHandlingChanges,
+        };
       });
     });
 
