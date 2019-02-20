@@ -13,6 +13,8 @@ module.exports = {
     filename: '[name].js',
   },
 
+  devtool: 'source-map',
+
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
@@ -33,7 +35,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        use: ['babel-loader', 'eslint-loader'],
+        use: ['babel-loader',/* 'eslint-loader'*/],
       },
     ]
   },
