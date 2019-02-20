@@ -1,57 +1,43 @@
 import React from 'react';
 
-const Header = (props) => {
-  return (
-    <h1 className="Header">
-      {props.title}
-    </h1>
-  );
-};
-
-class App extends React.Component {
+class Field extends React.Component {
   constructor(props) {
     super(props);
 
+    const { size } = props;
+
     this.state = {
-      title: 'My app',
-      isHandlingChanges: true,
-    };
-
-    document.addEventListener('contextmenu', () => {
-      this.setState((state) => {
-        return {
-          isHandlingChanges: !state.isHandlingChanges,
-        };
-      });
-    });
-
-    this.handleChange = this.handleChange.bind(this);
+      cells: Array(size * size)
+        .fill(null)
+        .map((value, index) => {
+          return {
+            value, id: index
+          };
+        }),
+    }
   }
-
-  handleChange(event) {
-    this.setState({
-      title: event.target.value
-    });
-  };
-
 
   render() {
-    const handleChange =  this.state.isHandlingChanges
-      ? this.handleChange
-      : null
-    ;
+    const { cells } = this.state;
+    const { size } = this.props;
+    const cellWidth = 100
 
     return (
-      <div className="App">
-        <Header title={this.state.title} />
-
-        <input
-          type="text"
-          onChange={handleChange}
-        />
+      <div className="field" style={{ width: size * cellWidth }}>
+        { cells.map(cell => (
+          <div key={ cell.id }>
+            { cell.value || '-' }
+          </div>
+        ))}
       </div>
-    );
+    )
   }
 }
+
+const App = () => {
+  return (
+    <Field size={3} />
+  );
+};
 
 export default App;
